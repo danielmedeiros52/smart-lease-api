@@ -8,13 +8,12 @@ export class PostgresConfigService {
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       type: 'postgres',
-      host: this.configService.get<string>('DB_HOST'),
-      port: 5432,
-      username: this.configService.get<string>('DB_USER'),
-      password: this.configService.get<string>('DB_PASSWORD'),
-      database: this.configService.get<string>('DB_DATABASE'),
-      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      url: this.configService.get<string>('DB_URL_NO_SSL'),
       synchronize: true,
+      dropSchema: false,
+      logging: true,
+      ssl: true,
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
     };
   }
 }

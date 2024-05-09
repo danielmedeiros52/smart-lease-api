@@ -12,6 +12,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+  app.setGlobalPrefix('/api/v1/');
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   await app.listen(3000);

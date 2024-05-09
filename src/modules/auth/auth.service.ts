@@ -21,26 +21,15 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const user: UserEntity | null = await this.userService.findByEmail(email);
-
     const payload: UserPayload = {
       sub: user.id,
       email: user.email,
       userName: user.name,
     };
     const access_token = await this.jwtService.signAsync(payload);
-    if (user.status === 'MIGRATED') {
-      this.emailServiceService.sendAccountConfirmation(user, access_token);
-      throw new UnauthorizedException(
-        'User migrated, check your email to activate your account.',
-      );
-    } else if (user.status !== 'ACTIVE') {
-      throw new UnauthorizedException('User not active');
-    }
-
     const userAuthenticated = await bcrypt.compare(password, user!.password);
     if (!userAuthenticated)
       throw new UnauthorizedException('wrong credentials');
-
     return {
       access_token: access_token,
       data: {

@@ -3,7 +3,7 @@
   "env": {
     "DATABASE_URL": "postgres://default:wBAML6IW0ZlR@ep-bitter-brook-89482181.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
     "DB_HOST":"postgres://default:wBAML6IW0ZlR@ep-bitter-brook-89482181.us-east-1.aws.neon.tech",
-    "DB_PORT_API":5432,
+    "DB_PORT_API":"5432",
     "DB_DATABASE":"smart-leasing"
 
   },

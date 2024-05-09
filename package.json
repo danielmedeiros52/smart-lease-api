@@ -32,6 +32,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^10.0.2",
     "@types/bcrypt": "^5.0.2",
+    "@vercel/postgres": "^0.8.0",
     "bcrypt": "^5.1.1",
     "cache-manager": "^5.4.0",
     "cache-manager-redis-yet": "^4.2.0",
@@ -45,7 +46,8 @@
     "reflect-metadata": "^0.2.0",
     "rimraf": "^5.0.5",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@nestjs/schematics": "^10.0.0",
@@ -65,7 +67,6 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   },

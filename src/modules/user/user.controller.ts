@@ -1,5 +1,8 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './user.service';
+import { HashPasswordPipe } from '../../pipes/hash-password.pipe';
+import { ListUserDto } from './dto/ListUser.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -9,8 +12,25 @@ export class UserController {
   findAll() {
     return this.userService.findAll();
   }
+
   @Get('/:id')
   findById(@Param('id') id: string) {
     return this.userService.findById(id);
+  }
+
+  @Post()
+  async create(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    @Body() { password, ...userData }: CreateUserDto,
+    @Body('password', HashPasswordPipe) hashedPass: string,
+  ) {
+    const createdUser = await this.userService.create({
+      ...userData,
+      password: hashedPass,
+    });
+    return {
+      message: 'User created successfully',
+      user: new ListUserDto(createdUser.id, createdUser.name),
+    };
   }
 }

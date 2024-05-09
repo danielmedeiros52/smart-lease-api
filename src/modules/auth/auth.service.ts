@@ -4,7 +4,6 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { UserEntity } from '../user/entities/user.entity';
 import { EmailServiceService } from '../email-service/email-service.service';
-import { UserStatus } from '../user/enum/userStatus';
 
 export interface UserPayload {
   sub: string;
@@ -45,13 +44,6 @@ export class AuthService {
       const user = await this.userService.findById(userId);
       if (user && user.status === 'ACTIVE') {
         throw new UnauthorizedException('User already activated');
-      } else if (user && user.status === 'MIGRATED') {
-        user.status = UserStatus.ACTIVE;
-        user.password = await bcrypt.hash(password, 10);
-        await this.userService.update(userId, user);
-        return {
-          message: 'User activated',
-        };
       }
     } catch (e) {
       throw new UnauthorizedException(e.message);
@@ -64,11 +56,6 @@ export class AuthService {
     const user = await this.userService.findById(userId);
     if (user && user.status === 'ACTIVE') {
       throw new UnauthorizedException('User already activated');
-    } else if (user && user.status === 'MIGRATED') {
-      this.emailServiceService.sendAccountConfirmation(user, token);
-      return {
-        message: 'Activation email sent',
-      };
     }
     throw new UnauthorizedException('User not found');
   }

@@ -27,12 +27,6 @@ import { MailerModule } from '@nestjs-modules/mailer';
       useClass: PostgresConfigService,
       inject: [PostgresConfigService],
     }),
-    CacheModule.registerAsync({
-      useFactory: async () => ({
-        store: await redisStore({ ttl: 10 * 1000 }),
-      }),
-      isGlobal: true,
-    }),
     MailerModule.forRoot({
       transport: {
         host: process.env.EMAIL_HOST,

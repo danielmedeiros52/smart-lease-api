@@ -20,6 +20,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: ['.env.development.local'],
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({

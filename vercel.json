@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "env": {
+    "DATABASE_URL": "postgres://default:wBAML6IW0ZlR@ep-bitter-brook-89482181.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+
+  },
   "builds": [
     {
       "src": "src/main.ts",

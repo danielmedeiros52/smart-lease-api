@@ -7,20 +7,30 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { UserStatus } from '../enum/userStatus';
 
 @Entity({ name: 'users' })
-export class UserBoEntity {
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'uid', length: 100, nullable: false })
-  uid: string;
+  @Column({ name: 'bo_uid' })
+  boId: string;
 
   @Column({ name: 'name', length: 100, nullable: false })
   name: string;
 
   @Column({ name: 'email', length: 70, nullable: false })
   email: string;
+
+  @Column({ name: 'title', length: 30, nullable: true })
+  title: string;
+
+  @Column({ name: 'phone', length: 30, nullable: true })
+  phone: string;
+
+  @Column({ name: 'country', length: 20, nullable: true })
+  country: string;
 
   @Exclude()
   @Column({ name: 'password', length: 255, nullable: false })
@@ -34,4 +44,7 @@ export class UserBoEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
+
+  @Column({ name: 'status', enum: UserStatus, nullable: false })
+  status: UserStatus;
 }

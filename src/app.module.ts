@@ -23,7 +23,6 @@ import { MailerModule } from '@nestjs-modules/mailer';
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
-      name: 'boApi',
       useClass: PostgresConfigService,
       inject: [PostgresConfigService],
     }),

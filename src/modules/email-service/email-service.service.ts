@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
-import { UserFinanceEntity } from '../user/entities/user.finance.entity';
+import { UserEntity } from '../user/entities/user.entity';
 import 'dotenv/config';
 import { mailConfirmation, forgotPass } from '../../constants/mails';
 
 @Injectable()
 export class EmailServiceService {
   constructor(private readonly mailerService: MailerService) {}
-  sendAccountConfirmation(user: UserFinanceEntity, token: string) {
+  sendAccountConfirmation(user: UserEntity, token: string) {
     this.mailerService.sendMail({
       to: user.email,
       from: 'noreply@smartfastpay.com',
@@ -20,7 +20,7 @@ export class EmailServiceService {
     });
   }
 
-  sendPasswordReset(user: UserFinanceEntity, token: string) {
+  sendPasswordReset(user: UserEntity, token: string) {
     this.mailerService.sendMail({
       to: user.email,
       from: 'noreply@smartfastpay.com',

@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { UserFinanceEntity } from '../user/entities/user.finance.entity';
+import { UserEntity } from '../user/entities/user.entity';
 import { EmailServiceService } from '../email-service/email-service.service';
 import { UserStatus } from '../user/enum/userStatus';
 
@@ -20,17 +20,7 @@ export class AuthService {
   ) {}
 
   async login(email: string, password: string) {
-    let user: UserFinanceEntity | null =
-      await this.userService.findByEmail(email);
-
-    if (!user) {
-      const userBo = await this.userService.findByEmailOnBoApi(email);
-      if (userBo) {
-        user = await this.userService.createUserFinanceFromBoApi(userBo);
-      } else {
-        throw new UnauthorizedException('User not found');
-      }
-    }
+    const user: UserEntity | null = await this.userService.findByEmail(email);
 
     const payload: UserPayload = {
       sub: user.id,

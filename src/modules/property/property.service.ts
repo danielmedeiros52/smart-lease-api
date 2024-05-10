@@ -1,15 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
+import { PropertyEntity } from './entities/property.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { WalletService } from '../wallet/wallet.service';
 
 @Injectable()
 export class PropertyService {
-  create(createPropertyDto: CreatePropertyDto) {
-    return 'This action adds a new property';
+  constructor(
+    @InjectRepository(PropertyEntity)
+    private readonly propertyEntityRepository: Repository<PropertyEntity>,
+    private readonly walletService: WalletService,
+  ) {}
+  async create(createPropertyDto: CreatePropertyDto) {
+    const property = new PropertyEntity();
+    Object.assign(property, createPropertyDto);
+    const propertySaved = await this.propertyEntityRepository.save(property);
+    await this.walletService.createForProperty(propertySaved.id);
+    return propertySaved;
   }
 
   findAll() {
-    return `This action returns all property`;
+    return this.propertyEntityRepository.find();
   }
 
   findOne(id: number) {

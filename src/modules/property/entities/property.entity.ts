@@ -10,6 +10,8 @@ import {
 } from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
 import { WalletEntity } from '../../wallet/entities/wallet.entity';
+import { UserStatus } from '../../user/enum/userStatus';
+import { PropertyStatus } from '../enum/propertyStatus';
 
 @Entity('properties')
 export class PropertyEntity {
@@ -36,11 +38,13 @@ export class PropertyEntity {
   @Column({ type: 'varchar', length: 255 })
   country: string;
   @Column({ type: 'varchar', length: 255 })
-  type: string;
+  propertyType: string;
   @Column({ type: 'varchar', length: 255 })
-  receivePaymentOptions: string;
+  paymentType: string;
   @Column({ type: 'float' })
-  reserveAmount: number;
+  reserveValue: number;
+  @Column({ name: 'status', enum: PropertyStatus, nullable: false,default: PropertyStatus.AVAILABLE })
+  status: UserStatus;
 
   @ManyToOne(() => UserEntity, (user) => user.properties)
   @JoinColumn({ name: 'user_id' })

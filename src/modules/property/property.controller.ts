@@ -9,6 +9,7 @@ export class PropertyController {
 
   @Post()
   create(@Body() createPropertyDto: CreatePropertyDto) {
+    console.log('createPropertyDto', createPropertyDto);
     return this.propertyService.create(createPropertyDto);
   }
 

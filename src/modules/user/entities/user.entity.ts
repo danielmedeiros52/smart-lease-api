@@ -42,6 +42,6 @@ export class UserEntity {
   @Column({ name: 'status', enum: UserStatus, nullable: false })
   status: UserStatus;
 
-  @OneToOne(() => WalletEntity, (wallet) => wallet.userId, { eager: false,nullable: true })
+  @OneToOne(() => WalletEntity, (wallet) => wallet.user, { eager: false,nullable: true })
   wallet: Relation<WalletEntity>;
 }

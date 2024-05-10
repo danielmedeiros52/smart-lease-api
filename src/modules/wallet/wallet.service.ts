@@ -11,7 +11,7 @@ export class WalletService {
   ) {}
   async createForUser(userId: string) {
     const wallet = new WalletEntity();
-    wallet.userId = userId;
+    wallet.user = userId;
     wallet.balance = 0;
     wallet.currency = 'BRL';
     const walletSaved = await this.walletEntityRepository.save(wallet);
@@ -25,7 +25,8 @@ export class WalletService {
 
   findByUserId(userId: string) {
     console.log('userId', userId);
-    return this.walletEntityRepository.createQueryBuilder('wallet')
+    return this.walletEntityRepository
+      .createQueryBuilder('wallet')
       .where('wallet.userId = :userId', { userId })
       .getOne();
   }

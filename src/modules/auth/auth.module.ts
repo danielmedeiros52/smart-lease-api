@@ -5,11 +5,13 @@ import { UserModule } from '../user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { EmailServiceModule } from '../email-service/email-service.module';
+import { WalletModule } from '../wallet/wallet.module';
 
 @Module({
   imports: [
     UserModule,
     EmailServiceModule,
+    WalletModule,
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => {
         return {

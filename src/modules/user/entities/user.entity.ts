@@ -5,9 +5,12 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   PrimaryGeneratedColumn,
+  OneToOne,
+  Relation,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { UserStatus } from '../enum/userStatus';
+import {  WalletEntity } from '../../wallet/entities/wallet.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -39,4 +42,6 @@ export class UserEntity {
   @Column({ name: 'status', enum: UserStatus, nullable: false })
   status: UserStatus;
 
+  @OneToOne(() => WalletEntity, (wallet) => wallet.userId, { eager: false,nullable: true })
+  wallet: Relation<WalletEntity>;
 }

@@ -10,12 +10,11 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { DefaultExceptionHandler } from './filters/default-exception-handler';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
-import { redisStore } from 'cache-manager-redis-yet';
 import { LoggerGlobalInterceptor } from './interceptors/logger-global/logger-global.interceptor';
-import { CacheModule } from '@nestjs/cache-manager';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { EmailServiceModule } from './modules/email-service/email-service.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { WalletModule } from './modules/wallet/wallet.module';
 
 @Module({
   imports: [
@@ -42,6 +41,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
     AuthModule,
     UserModule,
     EmailServiceModule,
+    WalletModule,
   ],
   controllers: [],
   providers: [

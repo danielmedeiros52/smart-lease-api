@@ -20,7 +20,7 @@ export class WalletEntity {
 
   @OneToOne(() => UserEntity, { eager: true, nullable: true })
   @JoinColumn({ name: 'user_id' })
-  userId: string;
+  user: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

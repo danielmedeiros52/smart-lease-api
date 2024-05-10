@@ -15,6 +15,7 @@ import { PostgresConfigService } from './config/postgres.config.service';
 import { EmailServiceModule } from './modules/email-service/email-service.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { WalletModule } from './modules/wallet/wallet.module';
+import { PropertyModule } from './modules/property/property.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { WalletModule } from './modules/wallet/wallet.module';
     UserModule,
     EmailServiceModule,
     WalletModule,
+    PropertyModule,
   ],
   controllers: [],
   providers: [

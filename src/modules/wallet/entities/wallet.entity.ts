@@ -4,9 +4,10 @@ import {
   Entity,
   JoinColumn,
   OneToOne,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn, Relation,
 } from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
+import { PropertyEntity } from '../../property/entities/property.entity';
 
 @Entity('wallets')
 export class WalletEntity {
@@ -20,7 +21,11 @@ export class WalletEntity {
 
   @OneToOne(() => UserEntity, { eager: true, nullable: true })
   @JoinColumn({ name: 'user_id' })
-  user: string;
+  user: Relation<UserEntity>;
+
+  @OneToOne(() => PropertyEntity, { eager: true, nullable: true })
+  @JoinColumn({ name: 'property_id' })
+  property: Relation<PropertyEntity>;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { WalletEntity } from './entities/wallet.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UserEntity } from '../user/entities/user.entity';
 
 @Injectable()
 export class WalletService {
@@ -11,7 +12,9 @@ export class WalletService {
   ) {}
   async createForUser(userId: string) {
     const wallet = new WalletEntity();
-    wallet.user = userId;
+    const user = new UserEntity();
+    user.id = userId;
+    wallet.user = user;
     wallet.balance = 0;
     wallet.currency = 'BRL';
     const walletSaved = await this.walletEntityRepository.save(wallet);

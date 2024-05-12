@@ -6,12 +6,13 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   OneToOne,
-  Relation, OneToMany,
+  Relation
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { UserStatus } from '../enum/userStatus';
 import { WalletEntity } from '../../wallet/entities/wallet.entity';
-import { PropertyEntity } from '../../property/entities/property.entity';
+import { OwnerEntity } from "../../../db/entity/owner.entity";
+import { TenantEntity } from "../../../db/entity/tenant.entity";
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -49,6 +50,17 @@ export class UserEntity {
   })
   wallet: Relation<WalletEntity>;
 
-  @OneToMany(() => PropertyEntity, (property) => property.owner)
-  properties: Relation<PropertyEntity[]>;
+  @OneToOne(() => OwnerEntity, (owner) => owner.user, {
+    eager: false,
+    nullable: true,
+  })
+  owner: Relation<OwnerEntity>;
+
+  @OneToOne(() => TenantEntity, (tenant) => tenant.user, {
+    eager: false,
+    nullable: true,
+  })
+  tenant: Relation<TenantEntity>;
+
+
 }

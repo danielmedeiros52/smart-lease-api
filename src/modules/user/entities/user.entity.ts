@@ -13,7 +13,7 @@ import { UserStatus } from '../enum/userStatus';
 import { WalletEntity } from '../../wallet/entities/wallet.entity';
 import { OwnerEntity } from '../../../db/entity/owner.entity';
 import { TenantEntity } from '../../../db/entity/tenant.entity';
-import { Group } from "../../auth/group/entities/group.entity";
+import { Group } from "../../group/entities/group.entity";
 
 @Entity({ name: 'users' })
 export class UserEntity {

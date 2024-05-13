@@ -8,6 +8,7 @@ import { UserStatus } from '../user/enum/userStatus';
 import { WalletService } from '../wallet/wallet.service';
 
 export interface UserPayload {
+  accessGroup: string;
   sub: string;
   email: string;
   userName: string;
@@ -29,6 +30,7 @@ export class AuthService {
     }
     const payload: UserPayload = {
       sub: user.id,
+      accessGroup: 'USER',
       email: user.email,
       userName: user.name,
     };
@@ -100,6 +102,7 @@ export class AuthService {
     }
     const payload: UserPayload = {
       sub: user.id,
+      accessGroup: 'USER',
       email: user.email,
       userName: user.name,
     };

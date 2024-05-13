@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { EmailServiceModule } from '../email-service/email-service.module';
 import { WalletModule } from '../wallet/wallet.module';
+import { GroupModule } from './group/group.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { WalletModule } from '../wallet/wallet.module';
       inject: [ConfigService],
       global: true,
     }),
+    GroupModule,
   ],
   controllers: [AuthController],
   providers: [AuthService],

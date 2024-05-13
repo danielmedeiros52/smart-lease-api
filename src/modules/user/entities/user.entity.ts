@@ -13,6 +13,7 @@ import { UserStatus } from '../enum/userStatus';
 import { WalletEntity } from '../../wallet/entities/wallet.entity';
 import { OwnerEntity } from '../../../db/entity/owner.entity';
 import { TenantEntity } from '../../../db/entity/tenant.entity';
+import { Group } from "../../auth/group/entities/group.entity";
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -61,4 +62,10 @@ export class UserEntity {
     nullable: true,
   })
   tenant: Relation<TenantEntity>;
+
+  @OneToOne(() => Group ,{
+    eager: false,
+    nullable: true,
+  })
+  accessGroup: Relation<TenantEntity>;
 }

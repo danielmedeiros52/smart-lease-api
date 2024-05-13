@@ -1,21 +1,24 @@
 import {
-  Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToOne,
-  PrimaryGeneratedColumn, Relation
-} from "typeorm";
-import { UserEntity } from "../../modules/user/entities/user.entity";
-import { AddressEntity } from "./address.entity";
-import { ProviderEntity } from "./provider.entity";
-import { PropertyEntity } from "../../modules/property/entities/property.entity";
-import { ExpensesEntity } from "./expenses.entity";
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Relation,
+} from 'typeorm';
+import { ProviderEntity } from './provider.entity';
+import { PropertyEntity } from '../../modules/property/entities/property.entity';
+import { ExpensesEntity } from './expenses.entity';
 
 @Entity({ name: 'maintenances' })
-export class MaintenanceEntity{
+export class MaintenanceEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ManyToMany(() => ProviderEntity)
   @JoinTable({ name: 'maintenance_providers' })
-  address: Relation<ProviderEntity[]>;
+  providers: Relation<ProviderEntity[]>;
 
   @ManyToOne(() => PropertyEntity, (property) => property.maintenances)
   @JoinColumn({ name: 'property_id' })

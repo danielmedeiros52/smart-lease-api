@@ -4,7 +4,8 @@ import {
   Entity,
   JoinColumn,
   OneToOne,
-  PrimaryGeneratedColumn, Relation,
+  PrimaryGeneratedColumn,
+  Relation,
 } from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
 import { PropertyEntity } from '../../property/entities/property.entity';

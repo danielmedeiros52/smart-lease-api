@@ -29,11 +29,4 @@ export class PropertyService {
     return `This action returns a #${id} property`;
   }
 
-  update(id: number, updatePropertyDto: UpdatePropertyDto) {
-    return `This action updates a #${id} property`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} property`;
-  }
 }

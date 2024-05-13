@@ -1,10 +1,16 @@
 import {
-  Entity, JoinColumn, ManyToOne, OneToMany, OneToOne,
-  PrimaryGeneratedColumn, Relation
-} from "typeorm";
-import { UserEntity } from "../../modules/user/entities/user.entity";
-import { PropertyEntity } from "../../modules/property/entities/property.entity";
-import { AddressEntity } from "./address.entity";
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  Relation,
+} from 'typeorm';
+import { UserEntity } from '../../modules/user/entities/user.entity';
+import { PropertyEntity } from '../../modules/property/entities/property.entity';
+import { AddressEntity } from './address.entity';
+import { ContractEntity } from './contract.entity';
 
 @Entity({ name: 'owners' })
 export class OwnerEntity {
@@ -21,4 +27,7 @@ export class OwnerEntity {
   @ManyToOne(() => AddressEntity, (address) => address.owners)
   @JoinColumn({ name: 'address_id' })
   address: Relation<OwnerEntity>;
+
+  @OneToMany(() => ContractEntity, (contract) => contract.owner)
+  contracts: Relation<ContractEntity[]>;
 }

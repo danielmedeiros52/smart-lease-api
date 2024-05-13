@@ -1,9 +1,11 @@
 import {
-  Entity, JoinColumn, ManyToOne, OneToOne,
-  PrimaryGeneratedColumn, Relation
-} from "typeorm";
-import { UserEntity } from "../../modules/user/entities/user.entity";
-import { AddressEntity } from "./address.entity";
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Relation,
+} from 'typeorm';
+import { AddressEntity } from './address.entity';
 
 @Entity({ name: 'providers' })
 export class ProviderEntity {

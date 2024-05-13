@@ -1,15 +1,13 @@
 import {
-  Entity, JoinColumn, ManyToOne, OneToMany, OneToOne,
-  PrimaryGeneratedColumn, Relation
-} from "typeorm";
-import { UserEntity } from "../../modules/user/entities/user.entity";
-import { PropertyEntity } from "../../modules/property/entities/property.entity";
-import { AddressEntity } from "./address.entity";
-import { MaintenanceEntity } from "./maintenance.entity";
-import { TaxEntity } from "./tax.entity";
-import { ExpensesEntity } from "./expenses.entity";
-import { WalletEntity } from "../../modules/wallet/entities/wallet.entity";
-import { ContractEntity } from "./contract.entity";
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  Relation,
+} from 'typeorm';
+import { ExpensesEntity } from './expenses.entity';
+import { ContractEntity } from './contract.entity';
 
 @Entity({ name: 'transactions' })
 export class TransactionEntity {
@@ -26,4 +24,3 @@ export class TransactionEntity {
   })
   expense: Relation<ExpensesEntity>;
 }
-

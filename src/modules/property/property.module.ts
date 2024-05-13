@@ -6,7 +6,7 @@ import { PropertyEntity } from './entities/property.entity';
 import { WalletModule } from '../wallet/wallet.module';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([PropertyEntity]),WalletModule]  ,
+  imports: [TypeOrmModule.forFeature([PropertyEntity]), WalletModule],
   controllers: [PropertyController],
   providers: [PropertyService],
   exports: [PropertyService],

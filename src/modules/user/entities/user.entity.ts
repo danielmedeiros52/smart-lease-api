@@ -6,13 +6,13 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   OneToOne,
-  Relation
+  Relation,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { UserStatus } from '../enum/userStatus';
 import { WalletEntity } from '../../wallet/entities/wallet.entity';
-import { OwnerEntity } from "../../../db/entity/owner.entity";
-import { TenantEntity } from "../../../db/entity/tenant.entity";
+import { OwnerEntity } from '../../../db/entity/owner.entity';
+import { TenantEntity } from '../../../db/entity/tenant.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -61,6 +61,4 @@ export class UserEntity {
     nullable: true,
   })
   tenant: Relation<TenantEntity>;
-
-
 }

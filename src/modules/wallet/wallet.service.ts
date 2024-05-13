@@ -42,7 +42,6 @@ export class WalletService {
     wallet.balance = 0;
     wallet.currency = 'BRL';
     return wallet;
-
   }
 
   findByUserId(userId: string) {
@@ -59,5 +58,4 @@ export class WalletService {
   findOne(id: number) {
     return `This action returns a #${id} wallet`;
   }
-
 }

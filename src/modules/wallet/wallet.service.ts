@@ -45,10 +45,9 @@ export class WalletService {
   }
 
   findByUserId(userId: string) {
-    console.log('userId', userId);
     return this.walletEntityRepository
       .createQueryBuilder('wallet')
-      .where('wallet.userId = :userId', { userId })
+      .where('wallet.user_id = :userId', { userId })
       .getOne();
   }
   findAll() {

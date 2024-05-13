@@ -15,7 +15,7 @@ export interface RequestWithUser extends Request {
 export interface UserPayload {
   sub: number;
   email: string;
-  accessGroup: string; // Adicione o campo de grupo de acesso
+  accessGroup: string;
 }
 
 @Injectable()
@@ -31,10 +31,13 @@ export class AuthGuard implements CanActivate {
       request.user = payload;
 
       const requiredGroup = this.getRequiredAccessGroup(context);
-      if (!this.isUserInRequiredGroup(payload, requiredGroup) && requiredGroup !== undefined) {
-        console.log('payload', payload);
-        console.log('requiredGroup', requiredGroup);
-        throw new ForbiddenException('User does not have the required access group');
+      if (
+        !this.isUserInRequiredGroup(payload, requiredGroup) &&
+        requiredGroup !== undefined
+      ) {
+        throw new ForbiddenException(
+          'User does not have the required access group',
+        );
       }
     } catch (error) {
       if (error instanceof UnauthorizedException) {
@@ -57,13 +60,18 @@ export class AuthGuard implements CanActivate {
     const handler = context.getHandler();
     const classRef = context.getClass();
 
-    const requiredGroup =
+    return (
       Reflect.getMetadata('accessGroup', handler) ||
-      Reflect.getMetadata('accessGroup', classRef);
-    return requiredGroup;
+      Reflect.getMetadata('accessGroup', classRef)
+    );
   }
 
-  private isUserInRequiredGroup(user: UserPayload, requiredGroup: string): boolean {
-    return user.accessGroup === requiredGroup;
+  private isUserInRequiredGroup(
+    user: UserPayload,
+    requiredGroup: string,
+  ): boolean {
+    return (
+      user.accessGroup === requiredGroup || user.accessGroup === 'ADMIN_SMART'
+    );
   }
 }

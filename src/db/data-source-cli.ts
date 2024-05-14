@@ -6,7 +6,6 @@ const dataSourceOptions: DataSourceOptions = {
   url: process.env.DB_URL_NO_SSL,
   synchronize: true,
   dropSchema: false,
-  logging: true,
   ssl: true,
   entities: [__dirname + '/../**/*.finance.entity.{js,ts}'],
   migrations: [__dirname + '/migrations/*.{js,ts}'],

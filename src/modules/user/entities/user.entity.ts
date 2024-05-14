@@ -13,7 +13,8 @@ import { UserStatus } from '../enum/userStatus';
 import { WalletEntity } from '../../wallet/entities/wallet.entity';
 import { OwnerEntity } from '../../../db/entity/owner.entity';
 import { TenantEntity } from '../../../db/entity/tenant.entity';
-import { Group } from "../../group/entities/group.entity";
+import { Group } from '../../group/entities/group.entity';
+import { UserAccessGroup } from '../../group/enum/accessGroup';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -45,6 +46,14 @@ export class UserEntity {
   @Column({ name: 'status', enum: UserStatus, nullable: false })
   status: UserStatus;
 
+  @Column({
+    name: 'access_group',
+    enum: UserAccessGroup,
+    nullable: false,
+    default: UserAccessGroup.COMMUNITY,
+  })
+  group: UserAccessGroup;
+
   @OneToOne(() => WalletEntity, (wallet) => wallet.user, {
     eager: false,
     nullable: true,
@@ -63,7 +72,7 @@ export class UserEntity {
   })
   tenant: Relation<TenantEntity>;
 
-  @OneToOne(() => Group ,{
+  @OneToOne(() => Group, {
     eager: false,
     nullable: true,
   })

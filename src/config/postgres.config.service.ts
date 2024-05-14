@@ -11,7 +11,6 @@ export class PostgresConfigService {
       url: this.configService.get<string>('DB_URL_NO_SSL'),
       synchronize: true,
       dropSchema: false,
-      logging: true,
       ssl: true,
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
     };

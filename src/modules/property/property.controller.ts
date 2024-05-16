@@ -19,6 +19,6 @@ export class PropertyController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.propertyService.findOne(+id);
+    return this.propertyService.findOne(id);
   }
 }

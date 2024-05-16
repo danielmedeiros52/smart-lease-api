@@ -11,7 +11,6 @@ import {
   Relation,
 } from 'typeorm';
 import { WalletEntity } from '../../wallet/entities/wallet.entity';
-import { UserStatus } from '../../user/enum/userStatus';
 import { PropertyStatus } from '../enum/propertyStatus';
 import { OwnerEntity } from '../../../db/entity/owner.entity';
 import { AddressEntity } from '../../../db/entity/address.entity';
@@ -34,13 +33,6 @@ export class PropertyEntity {
   bathrooms: number;
   @Column({ type: 'int', nullable: true })
   size: number;
-
-  @Column({ type: 'varchar', length: 255 })
-  zipcode: string;
-  @Column({ type: 'varchar', length: 255 })
-  city: string;
-  @Column({ type: 'varchar', length: 255 })
-  country: string;
   @Column({ type: 'varchar', length: 255 })
   propertyType: string;
   @Column({ type: 'varchar', length: 255 })
@@ -53,9 +45,9 @@ export class PropertyEntity {
     nullable: false,
     default: PropertyStatus.AVAILABLE,
   })
-  status: UserStatus;
+  status: PropertyStatus;
 
-  @ManyToOne(() => OwnerEntity, (owner) => owner.properties)
+  @ManyToOne(() => OwnerEntity, (owner) => owner.properties, { eager: true })
   @JoinColumn({ name: 'user_id' })
   owner: Relation<OwnerEntity>;
 
@@ -65,7 +57,7 @@ export class PropertyEntity {
   })
   wallet: Relation<WalletEntity>;
 
-  @ManyToOne(() => AddressEntity, (address) => address.properties)
+  @ManyToOne(() => AddressEntity, (address) => address.properties,{ eager: true })
   @JoinColumn({ name: 'address_id' })
   address: Relation<AddressEntity>;
 

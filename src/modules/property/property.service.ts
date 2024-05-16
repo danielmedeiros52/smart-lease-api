@@ -25,8 +25,13 @@ export class PropertyService {
     return this.propertyEntityRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} property`;
+  findOne(id: string) {
+    return this.propertyEntityRepository.findOne({ where: { id } });
+    // .createQueryBuilder('property')
+    // .leftJoinAndSelect('property.owner', 'owner')
+    // .leftJoinAndSelect('property.address', 'address')
+    // .leftJoinAndSelect('property.wallet', 'wallet')
+    // .where('property.id = :id', { id })
+    // .getOne();
   }
-
 }

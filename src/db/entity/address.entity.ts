@@ -1,4 +1,5 @@
 import {
+  Column,
   Entity,
   JoinColumn,
   OneToMany,
@@ -15,6 +16,15 @@ import { CountryEntity } from './country.entity';
 export class AddressEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+
+  @Column({ type: 'varchar', length: 255 })
+  street: string;
+  @Column({ type: 'varchar', length: 255 })
+  complement: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  zipcode: string;
 
   @OneToMany(() => OwnerEntity, (owner) => owner.address)
   owners: Relation<OwnerEntity[]>;

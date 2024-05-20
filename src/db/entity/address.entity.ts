@@ -17,7 +17,6 @@ export class AddressEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-
   @Column({ type: 'varchar', length: 255 })
   street: string;
   @Column({ type: 'varchar', length: 255 })

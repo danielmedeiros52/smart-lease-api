@@ -15,7 +15,7 @@ export interface RequestWithUser extends Request {
 export interface UserPayload {
   sub: number;
   email: string;
-  accessGroup: string;
+  role: string;
 }
 
 @Injectable()
@@ -61,8 +61,8 @@ export class AuthGuard implements CanActivate {
     const classRef = context.getClass();
 
     return (
-      Reflect.getMetadata('accessGroup', handler) ||
-      Reflect.getMetadata('accessGroup', classRef)
+      Reflect.getMetadata('role', handler) ||
+      Reflect.getMetadata('role', classRef)
     );
   }
 
@@ -71,7 +71,7 @@ export class AuthGuard implements CanActivate {
     requiredGroup: string,
   ): boolean {
     return (
-      user.accessGroup === requiredGroup || user.accessGroup === 'ADMIN_SMART'
+      user.role === requiredGroup || user.role === 'ADMIN_SMART'
     );
   }
 }

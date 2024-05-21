@@ -52,7 +52,7 @@ export class UserEntity {
     nullable: false,
     default: UserAccessGroup.COMMUNITY,
   })
-  group: UserAccessGroup;
+  role: UserAccessGroup;
 
   @OneToOne(() => WalletEntity, (wallet) => wallet.user, {
     eager: false,
@@ -72,9 +72,4 @@ export class UserEntity {
   })
   tenant: Relation<TenantEntity>;
 
-  @OneToOne(() => Group, {
-    eager: false,
-    nullable: true,
-  })
-  accessGroup: Relation<TenantEntity>;
 }

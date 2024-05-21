@@ -34,4 +34,8 @@ export class PropertyService {
     // .where('property.id = :id', { id })
     // .getOne();
   }
+  update(id: string, updatePropertyDto: UpdatePropertyDto) {
+    const property = Object.assign(new PropertyEntity(), updatePropertyDto);
+    return this.propertyEntityRepository.update(id, property);
+  }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
 import { PropertyService } from './property.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 
@@ -20,5 +20,9 @@ export class PropertyController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.propertyService.findOne(id);
+  }
+  @Put(':id')
+  update(@Param('id') id: string, @Body() updatePropertyDto: any) {
+    return this.propertyService.update(id, updatePropertyDto);
   }
 }

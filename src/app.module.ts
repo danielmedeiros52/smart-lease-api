@@ -16,6 +16,7 @@ import { EmailServiceModule } from './modules/email-service/email-service.module
 import { MailerModule } from '@nestjs-modules/mailer';
 import { WalletModule } from './modules/wallet/wallet.module';
 import { PropertyModule } from './modules/property/property.module';
+import { NewsLetterModule } from './modules/news-letter/news-letter.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { PropertyModule } from './modules/property/property.module';
     EmailServiceModule,
     WalletModule,
     PropertyModule,
+    NewsLetterModule,
   ],
   controllers: [],
   providers: [

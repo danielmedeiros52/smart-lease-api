@@ -13,15 +13,8 @@ export class NewsLetterService {
 
   async subscribe(lead: any) {
     const newsLetter =  new NewsLetterEntity();
-
-    newsLetter.concentment = lead.concentment === 'true' ? true : false;
-    newsLetter.type = lead.type
-    newsLetter.phone = lead.phone
-    newsLetter.email = lead.email
-    newsLetter.name = lead.name
-
-
-    return await this.newsLetterRepository.create(newsLetter);
+      Object.assign(newsLetter, lead)
+    return await this.newsLetterRepository.save(newsLetter);
 
   }
 

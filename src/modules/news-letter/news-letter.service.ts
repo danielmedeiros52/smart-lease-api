@@ -12,6 +12,9 @@ export class NewsLetterService {
 
 
   async subscribe(lead: any) {
+    const newsLetter =  new NewsLetterEntity();
+    Object.assign(newsLetter, lead);
+
     return await this.newsLetterRepository.create(lead);
 
   }

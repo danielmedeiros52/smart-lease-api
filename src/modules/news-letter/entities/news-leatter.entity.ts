@@ -18,7 +18,7 @@ export class NewsLetterEntity {
   @Column({ type: 'varchar', length: 255 })
   type: string;
   @Column({ type: 'boolean' })
-  concent: boolean;
+  concentment: boolean;
 
 
   @CreateDateColumn({ name: 'created_at' })
